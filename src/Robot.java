@@ -7,12 +7,13 @@ public abstract class Robot
 
     protected Case getPosition()
     {
-
+        return position;
     }
 
     protected void setPosition(Case c)
     {
-
+        // TODO: Verifier si position valide
+        position = c;
     }
 
     protected double getVitesse(NatureTerrain n)

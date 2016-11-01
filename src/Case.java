@@ -1,7 +1,6 @@
 
 
 
-public enum Direction {NORD, SUD, EST, OUEST}
 public enum NatureTerrain {EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT}
 
 
@@ -11,18 +10,32 @@ public class Case
     private int colonne;
     private NatureTerrain nature;
 
-    int getLigne()
+    public Case()
     {
-        
+      this.ligne = 0;
+      this.colonne = 0;
+      this.nature = TERRAIN_LIBRE;
     }
 
-    int getColonne()
+    public Case(int ligne, int colonne, NatureTerrain nature)
     {
-
+        this.ligne = ligne;
+        this.colonne = colonne;
+        this.nature = nature;
     }
 
-    NatureTerrain getNature()
+    public int getLigne()
     {
+        return ligne;
+    }
 
+    public int getColonne()
+    {
+        return colonne;
+    }
+
+    public NatureTerrain getNature()
+    {
+        return nature;
     }
 }
