@@ -4,6 +4,7 @@ public abstract class Robot
 {
     protected Case position;
     protected int volume;
+    protected int vitesse;
 
     protected Case getPosition()
     {
@@ -16,18 +17,11 @@ public abstract class Robot
         position = c;
     }
 
-    protected double getVitesse(NatureTerrain n)
-    {
+    abstract protected double getVitesse(NatureTerrain n);
 
-    }
 
-    protected deverserEau(int vol)
-    {
+    abstract protected deverserEau(int vol);
 
-    }
+    abstract protected void remplirReservoir();
 
-    protected void remplirReservoir()
-    {
-
-    }
 }
