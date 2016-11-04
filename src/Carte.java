@@ -10,9 +10,12 @@ public class Carte
     private int nbColonnes;
     private Case[][] matrice;
 
-    public Carte(String fileName)
+    public Carte(int tailleCase, int nbLignes, int nbColonnes)
     {
-        // Initialiser la carte à partir du fichier
+        this.tailleCase = tailleCase;
+        this.nbLignes = nbLignes;
+        this.nbColonnes = nbColonnes;
+        this.matrice = new Case[nbLignes][nbColonnes];
     }
 
     public void Evenement(long date)
@@ -38,6 +41,12 @@ public class Carte
     public Case getCase(int lig, int col)
     {
         return matrice[lig][col];
+    }
+
+
+    public void setCase(int lig, int col, Case case)
+    {
+        matrice[lig][col] = case;
     }
 
     public boolean voisinExiste(Case src, Direction dir)
