@@ -7,4 +7,8 @@ public class RobotPatte extends Robot {
             default return this.vitesse;
         }
     }
+    public void remplirReservoir () {
+        return;
+    }
+    
 }

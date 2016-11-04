@@ -13,10 +13,10 @@ public class Drone extends Robot
         return this.vitesse
     }
     public void remplirReservoir () {
-        // LUCAAAAAAAAAAAS faut que tu écives Attendre 
+        // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();
         Attendre(30);
-        this.volume =
+        this.volume =10000;
     }
 
     }

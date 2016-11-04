@@ -23,5 +23,5 @@ public abstract class Robot
     abstract protected deverserEau(int vol);
 
     abstract protected void remplirReservoir();
-
+    abstract protected void allerChercherEau();
 }

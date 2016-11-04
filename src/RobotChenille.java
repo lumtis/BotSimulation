@@ -17,4 +17,10 @@ public class RobotChenille extends Robot {
                 return this.vitesse;
         }
     }
+    public void remplirReservoir () {
+        // TODO SLUCAAAAAAAAAAAS faut que tu écives Attendre
+        allerChercherEau();
+        Attendre(5);
+        this.volume =2000;
+    }
 }

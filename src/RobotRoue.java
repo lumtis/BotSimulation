@@ -10,4 +10,10 @@ public class RobotRoue extends Robot {
             default : return 0;
         }
     }
+    public void remplirReservoir () {
+        // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
+        allerChercherEau();
+        Attendre(10);
+        this.volume =5000;
+    }
 }
