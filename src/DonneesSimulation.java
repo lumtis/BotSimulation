@@ -72,5 +72,11 @@ public class DonneesSimulation {
         if (scanner.findInLine("(\\d+)") != null) {
             throw new DataFormatException("format invalide, donnees en trop.");
         }
+
+    public Carte getCarte()
+    {
+        return carte;
     }
+
+
 }
