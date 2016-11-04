@@ -1,10 +1,6 @@
+public class Carte {
+    public enum Direction {NORD, SUD, EST, OUEST}
 
-
-public enum Direction {NORD, SUD, EST, OUEST}
-
-
-public class Carte
-{
     private int tailleCase;
     private int nbLignes;
     private int nbColonnes;
@@ -44,10 +40,11 @@ public class Carte
     }
 
 
-    public void setCase(int lig, int col, Case case)
+    public void setCase(int lig, int col, Case nCase)
     {
-        matrice[lig][col] = case;
+        this.matrice[lig][col] = nCase;
     }
+
 
     public boolean voisinExiste(Case src, Direction dir)
     {
@@ -65,7 +62,7 @@ public class Carte
                 if(src.getColonne() == this.getNbColonnes()-1)
                     return false;
                 break;
-            case WEST:
+            case OUEST:
                 if(src.getColonne() == 0)
                     return false;
                 break;
@@ -91,7 +88,7 @@ public class Carte
                 case EST:
                     return this.getCase(src.getLigne(), src.getColonne()+1);
                     break;
-                case WEST:
+                case OUEST:
                     return this.getCase(src.getLigne(), src.getColonne()-1);
                     break;
                 default:

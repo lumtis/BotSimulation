@@ -1,20 +1,16 @@
+public class Case {
+    public enum NatureTerrain {EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT}
 
-
-
-public enum NatureTerrain {EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT}
-
-
-public class Case
-{
     private int ligne;
     private int colonne;
     private NatureTerrain nature;
+
 
     public Case()
     {
       this.ligne = 0;
       this.colonne = 0;
-      this.nature = TERRAIN_LIBRE;
+      this.nature = NatureTerrain.TERRAIN_LIBRE;
     }
 
     public Case(int ligne, int colonne, NatureTerrain nature)
