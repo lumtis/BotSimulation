@@ -8,9 +8,9 @@ public class DonneesSimulation {
     public DonneesSimulation(String name){
         /* Cartes */
         ignorerCommentaires();
-        int tailleCase = scanner.nextInt();
         int nbLignes = scanner.nextInt();
         int nbColonnes = scanner.nextInt();
+        int tailleCase = scanner.nextInt();
         this.carte = new Carte(tailleCase, nbLignes, nbColonnes);
         for (int lig = 0; lig < nbLignes; lig++) {
             for (int col = 0; col < nbColonnes; col++) {
