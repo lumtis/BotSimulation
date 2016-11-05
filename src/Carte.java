@@ -73,29 +73,21 @@ public class Carte {
         return true;
     }
 
-    public Case getVoisin(Case src, Direction dir)
-    {
-        if(voisinExiste(src, dir))
-        {
-            switch(dir)
-            {
+    public Case getVoisin(Case src, Direction dir) {
+        if(voisinExiste(src, dir)) {
+            switch(dir) {
                 case NORD:
                     return this.getCase(src.getLigne()-1, src.getColonne());
-                    break;
                 case SUD:
                     return this.getCase(src.getLigne()+1, src.getColonne());
-                    break;
                 case EST:
                     return this.getCase(src.getLigne(), src.getColonne()+1);
-                    break;
-                case OUEST:
-                    return this.getCase(src.getLigne(), src.getColonne()-1);
-                    break;
+                //case OUEST:
                 default:
-                    break;
+                    return this.getCase(src.getLigne(), src.getColonne()-1);
             }
-        }
-        else
+        } else {
             return null;
+          }
     }
 }
