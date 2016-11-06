@@ -75,12 +75,9 @@ public class Carte {
         return true;
     }
 
-    public Case getVoisin(Case src, Direction dir)
-    {
-        if(voisinExiste(src, dir))
-        {
-            switch(dir)
-            {
+    public Case getVoisin(Case src, Direction dir) {
+        if(voisinExiste(src, dir)) {
+            switch(dir) {
                 case NORD:
                     return this.getCase(src.getLigne()-1, src.getColonne());
                 case SUD:
@@ -90,11 +87,10 @@ public class Carte {
                 case OUEST:
                     return this.getCase(src.getLigne(), src.getColonne()-1);
                 default:
-                    break;
+                    return this.getCase(src.getLigne(), src.getColonne()-1);
             }
         }
         else
             return null;
-		return null;
     }
 }

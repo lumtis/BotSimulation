@@ -1,6 +1,21 @@
 package simulation;
+
+import simulation.Case.NatureTerrain;
+
 public class RobotRoue extends Robot {
-    int getVitesse (NatureTerrain n) {
+
+    public RobotRoue(Case c, int vit) {
+        super(c, vit);
+        if (vit == -1) {
+            this.setVitesse(80);
+        }
+    }
+
+    public String getName() {
+    	return "res/robotroue.png";
+    }
+
+    public double getVitesse (NatureTerrain n) {
         switch(n){
             case TERRAIN_LIBRE :
             case HABITAT:
@@ -14,7 +29,24 @@ public class RobotRoue extends Robot {
     public void remplirReservoir () {
         // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();
-        Attendre(10);
+        //Attendre(10);
         this.volume =5000;
     }
+
+
+
+	@Override
+	public void deverserEau(int vol) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void allerChercherEau() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

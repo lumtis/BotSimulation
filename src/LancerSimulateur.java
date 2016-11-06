@@ -8,7 +8,7 @@ public class LancerSimulateur {
 	public static void main(String[] args)
     {
         // crée la fenêtre graphique dans laquelle dessiner
-        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+        GUISimulator gui = new GUISimulator(Simulateur.fenetreLargeur, Simulateur.fenetreLongueur, Color.BLACK);
         // crée l'invader, en l'associant à la fenêtre graphique précédente
         Simulateur sim = new Simulateur(gui, args[0]);
     }

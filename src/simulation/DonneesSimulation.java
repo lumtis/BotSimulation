@@ -2,90 +2,104 @@ package simulation;
 import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
-import io.LecteurDonnees;
-import simulation.Case.NatureTerrain;
+import java.io.*;
+import java.util.*;
 
 public class DonneesSimulation {
-
     private Carte carte;
     private Incendie[] incendies;
     private Robot[] robots;
 
+    private static Scanner scanner;
 
-    public DonneesSimulation(String name){
-        /* Cartes */
-    	Scanner sc = new Scanner(System.in);
-    	
+
+    public DonneesSimulation(String name) throws FileNotFoundException, DataFormatException {
+        scanner = new Scanner(new File(name));
+        scanner.useLocale(Locale.US);
+        // Cartes
         ignorerCommentaires();
-        int nbLignes = sc.nextInt();
-        int nbColonnes = sc.nextInt();
-        int tailleCase = sc.nextInt();
+        int nbLignes = scanner.nextInt();
+        int nbColonnes = scanner.nextInt();
+        int tailleCase = scanner.nextInt();
+        verifieLigneTerminee();
+
         this.carte = new Carte(tailleCase, nbLignes, nbColonnes);
         for (int lig = 0; lig < nbLignes; lig++) {
             for (int col = 0; col < nbColonnes; col++) {
                 ignorerCommentaires();
-                Case nCase = new Case(lig, col, getNature(sc.next()));
-                carte.setCase(lig, col, nCase);
+                //Case nCase = new Case(lig, col, (Case.NatureTerrain) scanner.next());
+                Case nCase = new Case(lig, col, Case.NatureTerrain.valueOf(scanner.next()));
+                this.carte.setCase(lig, col, nCase);
+                verifieLigneTerminee();
+                /* Test
+                System.out.println(lig + " " + col);
+                System.out.println (this.carte.getCase(lig,col).getNature());
+                */
             }
         }
-        
-        /* Incendies
+
+        // Incendie
         ignorerCommentaires();
         int nbIncendies = scanner.nextInt();
         this.incendies = new Incendie[nbIncendies];
-        */
-
-        /* Incendie
-        for (int k = 0; k < nbIncendies; k++) {
+        verifieLigneTerminee();
+        for (int i = 0 ; i < nbIncendies; i++) {
             ignorerCommentaires();
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
-            int intensite = scanner.nextInt();
-            Incendie incendie = new Incendie(this.carte.getCase(lig,col),intensite);
-            incendies[k] = incendie;
+            int inte = scanner.nextInt();
+            verifieLigneTerminee();
+            incendies[i] = new Incendie(this.carte.getCase(lig,col),inte);
         }
+
+        /* Test
+        System.out.println(incendies[4].getIntensite());
         */
-
-
-        /* Robots
+        // Robots
+        
         ignorerCommentaires();
         int nbRobots = scanner.nextInt();
-        this.robots = new Robot[nbIncendies];
-        for (int k = 0; k < nbIncendies; k++) {
+        verifieLigneTerminee();
+        this.robots = new Robot[nbRobots];
+        for (int i = 0 ; i < nbRobots; i++) {
             ignorerCommentaires();
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
-            NatureTerrain =
-            int intensite = scanner.nextInt();
-            Incendie incendie = new Incendie(this.carte.getCase(lig,col),intensite);
-            Incendies[k] = incendie;
+            String type = scanner.next();
+            String s = scanner.findInLine("(\\d+)");
+            int vit;
+            if ( s == null) {
+                vit = -1;
+            } else {
+                vit = Integer.parseInt(s);
+            }
+            verifieLigneTerminee();
+            Robot rob;
+            switch (type) {
+                case "DRONE":
+                    rob = new Drone(this.carte.getCase(lig,col),vit);
+                    break;
+                case "CHENILLES":
+                    rob = new RobotChenille(this.carte.getCase(lig,col),vit);
+                    break;
+                case "PATTES":
+                    rob = new RobotPatte(this.carte.getCase(lig,col),vit);
+                    break;
+                case "ROUES":
+                    rob = new RobotRoue(this.carte.getCase(lig,col),vit);
+                    break;
+                default:
+                    throw new DataFormatException("DataFormatException");
+            }
+            robots[i] = rob;
         }
-        */
-
-
+        
     }
 
-    private Case.NatureTerrain getNature(String s) {
-    	switch(s) {
-    	case "EAU":
-    		return NatureTerrain.EAU;
-    	case "FORET": 
-    		return NatureTerrain.FORET;
-    	case "ROCHE":
-    		return NatureTerrain.ROCHE;
-    	case "TERRAIN_LIBRE":
-    		return NatureTerrain.TERRAIN_LIBRE;
-    	case "HABITAT":
-    		return NatureTerrain.HABITAT;
-    	default:
-    		return NatureTerrain.TERRAIN_LIBRE;
-    	}
-    }
 
     private void ignorerCommentaires() {
-		Scanner sc = new Scanner(System.in);
-    	while(sc.hasNext("#.*")) {
-        	sc.nextLine();
+    	while(scanner.hasNext("#.*")) {
+    		scanner.nextLine();
         }
     }
 
@@ -93,9 +107,10 @@ public class DonneesSimulation {
      * Verifie qu'il n'y a plus rien a lire sur cette ligne (int ou float).
      * @throws ExceptionFormatDonnees
      */
+
+
     private void verifieLigneTerminee() throws DataFormatException {
-    	Scanner sc = new Scanner(System.in);
-    	if (sc.findInLine("(\\d+)") != null) {
+    	if (scanner.findInLine("(\\d+)") != null) {
             throw new DataFormatException("format invalide, donnees en trop.");
         }
     }
@@ -103,6 +118,16 @@ public class DonneesSimulation {
     public Carte getCarte()
     {
         return carte;
+    }
+
+    public Incendie[] getIncendies()
+    {
+        return incendies;
+    }
+
+    public Robot[] getRobots()
+    {
+        return robots;
     }
 
 

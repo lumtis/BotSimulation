@@ -32,19 +32,25 @@ testInvader:
 testLecture:
 	javac -d bin -sourcepath src src/TestLecteurDonnees.java
 
+test2:
+	javac -d bin -sourcepath src src/Test2.java
+
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeInvader
 exeSimulateur:
-	java -classpath bin:bin/gui.jar LancerSimulateur cartes/desertOfDeath-20x20.map
+	java -classpath bin:bin/gui.jar LancerSimulateur cartes/carteSujet.map
 
 exeInvader:
 	java -classpath bin:bin/gui.jar TestInvader
 
 exeLecture:
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
+
+exe2: 
+	java -classpath bin Test2 cartes/carteSujet.map
 
 clean:
 	rm -rf bin/*.class
