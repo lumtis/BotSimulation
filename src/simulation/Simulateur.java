@@ -1,26 +1,16 @@
-
+package simulation;
 import gui.*;
+
 import java.awt.*;
-import java.util.*;
-
-public class LancerSimulateur
-{
-    public static void main(String[] args)
-    {
-        // crée la fenêtre graphique dans laquelle dessiner
-        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-        // crée l'invader, en l'associant à la fenêtre graphique précédente
-        Simulateur sim = new Simulateur(gui, args[0]);
-    }
-}
 
 
-class Simulateur implements Simulable
+public class Simulateur implements Simulable
 {
     private DonneesSimulation data;
     private GUISimulator gui;
-
-    public void Simulateur(GUISimulator gui, String name)
+    
+    
+    public Simulateur(GUISimulator gui, String name)
     {
         // Recupération des données
         data = new DonneesSimulation(name);
@@ -30,28 +20,24 @@ class Simulateur implements Simulable
 
         draw();
     }
-
-
+    
+    
     private String getImageName(Case.NatureTerrain nature) {
         switch(nature) {
             case EAU:
                 return "res/water.png";
-            break;
             case FORET:
                 return "res/tree.png";
-            break;
             case ROCHE:
                 return "res/rock.png";
-            break;
             case TERRAIN_LIBRE:
                 return "res/grass.png";
-            break;
             case HABITAT:
                 return "res/house.png";
-            break;
             default:
             break;
         }
+		return null;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package simulation;
+
 public class Case {
     public enum NatureTerrain {EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT}
 

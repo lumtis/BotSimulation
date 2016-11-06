@@ -1,3 +1,4 @@
+package simulation;
 public class RobotPatte extends Robot {
     int getVitesse(NatureTerrain n){
         this.vitesse =30;
@@ -10,5 +11,5 @@ public class RobotPatte extends Robot {
     public void remplirReservoir () {
         return;
     }
-    
+
 }

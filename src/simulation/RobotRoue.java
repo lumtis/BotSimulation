@@ -1,3 +1,4 @@
+package simulation;
 public class RobotRoue extends Robot {
     int getVitesse (NatureTerrain n) {
         switch(n){

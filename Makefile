@@ -24,7 +24,7 @@
 all: testInvader testLecture
 
 simulateur:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/Simulateur.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/LancerSimulateur.java
 
 testInvader:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
@@ -38,7 +38,7 @@ testLecture:
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeInvader
 exeSimulateur:
-	java -classpath bin:bin/gui.jar Simulateur
+	java -classpath bin:bin/gui.jar LancerSimulateur cartes/desertOfDeath-20x20.map
 
 exeInvader:
 	java -classpath bin:bin/gui.jar TestInvader

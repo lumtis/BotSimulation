@@ -1,6 +1,8 @@
+package simulation;
+
 public class Drone extends Robot
 {
-    public int getVitesse(NatureTerrain n) {
+    public int getVitesse(Case.NatureTerrain n) {
         // non initialisé
         if (this.vitesse == -1 ) {
             this.vitesse=100;
@@ -15,9 +17,20 @@ public class Drone extends Robot
     public void remplirReservoir () {
         // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();
-        Attendre(30);
+        //Attendre(30);
         this.volume =10000;
     }
+    
+    
+	protected void deverserEau(int vol) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void allerChercherEau() {
+		// TODO Auto-generated method stub
+		
+	}
 
     }
 }

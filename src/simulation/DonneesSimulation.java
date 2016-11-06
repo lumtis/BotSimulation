@@ -1,3 +1,10 @@
+package simulation;
+import java.util.Scanner;
+import java.util.zip.DataFormatException;
+
+import io.LecteurDonnees;
+import simulation.Case.NatureTerrain;
+
 public class DonneesSimulation {
 
     private Carte carte;
@@ -7,19 +14,21 @@ public class DonneesSimulation {
 
     public DonneesSimulation(String name){
         /* Cartes */
+    	Scanner sc = new Scanner(System.in);
+    	
         ignorerCommentaires();
-        int nbLignes = scanner.nextInt();
-        int nbColonnes = scanner.nextInt();
-        int tailleCase = scanner.nextInt();
+        int nbLignes = sc.nextInt();
+        int nbColonnes = sc.nextInt();
+        int tailleCase = sc.nextInt();
         this.carte = new Carte(tailleCase, nbLignes, nbColonnes);
         for (int lig = 0; lig < nbLignes; lig++) {
             for (int col = 0; col < nbColonnes; col++) {
                 ignorerCommentaires();
-                nCase = new Case(lig, col, (Case.NatureTerrain) scanner.next());
+                Case nCase = new Case(lig, col, getNature(sc.next()));
                 carte.setCase(lig, col, nCase);
             }
         }
-
+        
         /* Incendies
         ignorerCommentaires();
         int nbIncendies = scanner.nextInt();
@@ -56,11 +65,27 @@ public class DonneesSimulation {
 
     }
 
-
+    private Case.NatureTerrain getNature(String s) {
+    	switch(s) {
+    	case "EAU":
+    		return NatureTerrain.EAU;
+    	case "FORET": 
+    		return NatureTerrain.FORET;
+    	case "ROCHE":
+    		return NatureTerrain.ROCHE;
+    	case "TERRAIN_LIBRE":
+    		return NatureTerrain.TERRAIN_LIBRE;
+    	case "HABITAT":
+    		return NatureTerrain.HABITAT;
+    	default:
+    		return NatureTerrain.TERRAIN_LIBRE;
+    	}
+    }
 
     private void ignorerCommentaires() {
-        while(scanner.hasNext("#.*")) {
-            scanner.nextLine();
+		Scanner sc = new Scanner(System.in);
+    	while(sc.hasNext("#.*")) {
+        	sc.nextLine();
         }
     }
 
@@ -69,9 +94,11 @@ public class DonneesSimulation {
      * @throws ExceptionFormatDonnees
      */
     private void verifieLigneTerminee() throws DataFormatException {
-        if (scanner.findInLine("(\\d+)") != null) {
+    	Scanner sc = new Scanner(System.in);
+    	if (sc.findInLine("(\\d+)") != null) {
             throw new DataFormatException("format invalide, donnees en trop.");
         }
+    }
 
     public Carte getCarte()
     {

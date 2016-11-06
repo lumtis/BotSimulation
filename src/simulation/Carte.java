@@ -1,3 +1,5 @@
+package simulation;
+
 public class Carte {
     public enum Direction {NORD, SUD, EST, OUEST}
 
@@ -81,21 +83,18 @@ public class Carte {
             {
                 case NORD:
                     return this.getCase(src.getLigne()-1, src.getColonne());
-                    break;
                 case SUD:
                     return this.getCase(src.getLigne()+1, src.getColonne());
-                    break;
                 case EST:
                     return this.getCase(src.getLigne(), src.getColonne()+1);
-                    break;
                 case OUEST:
                     return this.getCase(src.getLigne(), src.getColonne()-1);
-                    break;
                 default:
                     break;
             }
         }
         else
             return null;
+		return null;
     }
 }

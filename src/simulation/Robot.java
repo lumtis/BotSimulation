@@ -1,5 +1,4 @@
-
-
+package simulation;
 public abstract class Robot
 {
     protected Case position;
@@ -17,10 +16,10 @@ public abstract class Robot
         position = c;
     }
 
-    abstract protected double getVitesse(NatureTerrain n);
+    abstract protected double getVitesse(Case.NatureTerrain n);
 
 
-    abstract protected deverserEau(int vol);
+    abstract protected void deverserEau(int vol);
 
     abstract protected void remplirReservoir();
     abstract protected void allerChercherEau();

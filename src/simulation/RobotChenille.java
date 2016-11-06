@@ -1,3 +1,4 @@
+package simulation;
 public class RobotChenille extends Robot {
     int getVitesse (NatureTerrain n) {
         if (this.vitesse == -1 ) {
