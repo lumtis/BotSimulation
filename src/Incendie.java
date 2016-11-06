@@ -16,4 +16,8 @@ public class Incendie
     {
         return position;
     }
+
+    public int getIntensite() {
+        return this.intensite;
+    }
 }

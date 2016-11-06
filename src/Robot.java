@@ -6,6 +6,20 @@ public abstract class Robot
     protected int volume;
     protected int vitesse;
 
+    public Robot(Case c, int vit) {
+        this.vitesse = vit;
+        this.position = c;
+    }
+
+
+    protected void setVitesse(int vit) {
+        this.vitesse = vit;
+    }
+
+    protected int getVitesse() {
+        return this.vitesse;
+    }
+
     protected Case getPosition()
     {
         return position;
@@ -17,10 +31,11 @@ public abstract class Robot
         position = c;
     }
 
-    abstract protected double getVitesse(NatureTerrain n);
+
+    abstract protected double getVitesse(Case.NatureTerrain n);
 
 
-    abstract protected deverserEau(int vol);
+    abstract protected void deverserEau(int vol);
 
     abstract protected void remplirReservoir();
     abstract protected void allerChercherEau();

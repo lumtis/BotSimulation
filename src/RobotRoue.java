@@ -1,4 +1,14 @@
 public class RobotRoue extends Robot {
+
+    public RobotRoue(Case c, int vit) {
+        super(c, vit);
+        if (vit == -1) {
+            this.setVitesse(80);
+        }
+    }
+
+
+
     int getVitesse (NatureTerrain n) {
         switch(n){
             case TERRAIN_LIBRE :
@@ -16,4 +26,5 @@ public class RobotRoue extends Robot {
         Attendre(10);
         this.volume =5000;
     }
+
 }

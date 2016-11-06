@@ -1,4 +1,12 @@
 public class RobotChenille extends Robot {
+
+    public RobotChenille(Case c, int vit) {
+        super(c, vit);
+        if (vit == -1) {
+            this.setVitesse(60);
+        }
+    }
+
     int getVitesse (NatureTerrain n) {
         if (this.vitesse == -1 ) {
             this.vitesse = 60;
@@ -23,4 +31,5 @@ public class RobotChenille extends Robot {
         Attendre(5);
         this.volume =2000;
     }
+
 }

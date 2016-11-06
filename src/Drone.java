@@ -1,5 +1,12 @@
-public class Drone extends Robot
-{
+public class Drone extends Robot {
+
+    public Drone(Case c, int vit) {
+        super(c, vit);
+        if (vit == -1) {
+            this.setVitesse(100);
+        }
+    }
+
     public int getVitesse(NatureTerrain n) {
         // non initialisé
         if (this.vitesse == -1 ) {
@@ -19,5 +26,5 @@ public class Drone extends Robot
         this.volume =10000;
     }
 
-    }
+
 }
