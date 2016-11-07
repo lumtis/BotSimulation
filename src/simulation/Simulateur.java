@@ -11,6 +11,7 @@ public class Simulateur implements Simulable
 {
     private DonneesSimulation data;
     private GUISimulator gui;
+    private long dateSimulation;
     public static final int fenetreLargeur = 800;
     public static final int fenetreLongueur = 800;
     public static final String fireName = "res/fire.gif";
@@ -28,6 +29,7 @@ public class Simulateur implements Simulable
 			e.printStackTrace();
 		}
 
+        dateSimulation = 0;
         this.gui = gui;
         gui.setSimulable(this);
 
@@ -107,5 +109,18 @@ public class Simulateur implements Simulable
         	
         
         }
+    }
+    
+    // Ajouter un evenement
+    public void ajouteEvenement(Evenement e) {
+    	
+    }
+    
+    public void incrementeDate() {
+    	dateSimulation++;
+    }
+    
+    public boolean simulationTerminee() {
+    	return false;
     }
 }
