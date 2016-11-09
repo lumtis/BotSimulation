@@ -4,6 +4,7 @@ import gui.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
 
@@ -12,6 +13,9 @@ public class Simulateur implements Simulable
     private DonneesSimulation data;
     private GUISimulator gui;
     private long dateSimulation;
+    private ArrayList<Evenement> ev;
+    
+    // MACRO
     public static final int fenetreLargeur = 800;
     public static final int fenetreLongueur = 800;
     public static final String fireName = "res/fire.gif";
@@ -30,6 +34,8 @@ public class Simulateur implements Simulable
 		}
 
         dateSimulation = 0;
+        ev = new ArrayList<Evenement>();
+        
         this.gui = gui;
         gui.setSimulable(this);
 
@@ -57,7 +63,21 @@ public class Simulateur implements Simulable
 
     @Override
     public void next() {
+    	int i;
+    	Evenement tmp;
+    	
+    	// On effectue toutles evenements liés à cette date
+    	for(i = 0; i< ev.size(); i++) {
+    		tmp = ev.get(i);
+    		if(tmp.getDate() == this.getDate()) {
+    			tmp.execute();
+    			ev.remove(i);
+    			i--;
+    		}
+    	}
+    	
         draw();
+    	incrementeDate();
     }
 
     @Override
@@ -113,11 +133,15 @@ public class Simulateur implements Simulable
     
     // Ajouter un evenement
     public void ajouteEvenement(Evenement e) {
-    	
+    	ev.add(e);
     }
     
     public void incrementeDate() {
     	dateSimulation++;
+    }
+    
+    public long getDate() {
+    	return dateSimulation;
     }
     
     public boolean simulationTerminee() {
