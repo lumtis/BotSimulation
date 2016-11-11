@@ -16,9 +16,10 @@ public class Simulateur implements Simulable
     private ArrayList<Evenement> ev;
     
     // MACRO
-    public static final int fenetreLargeur = 800;
-    public static final int fenetreLongueur = 800;
-    public static final String fireName = "res/fire.gif";
+    public static final long PAS = 10;	// secondes
+    public static final int FENETRELARGEUR = 800;
+    public static final int FENETRELONGUEUR = 800;
+    public static final String FIRENAME = "res/fire.gif";
     
     public Simulateur(GUISimulator gui, String name)
     {
@@ -89,8 +90,8 @@ public class Simulateur implements Simulable
         int i, j;
         float totalLargeur = data.getCarte().getTailleCases() * data.getCarte().getNbColonnes();
         float totalLongueur = data.getCarte().getTailleCases() * data.getCarte().getNbLignes();
-        int realLargeur = (int)(((float)data.getCarte().getTailleCases()) * ((float)fenetreLargeur)/totalLargeur);
-        int realLongueur = (int)(((float)data.getCarte().getTailleCases()) * ((float)fenetreLongueur)/totalLongueur);
+        int realLargeur = (int)(((float)data.getCarte().getTailleCases()) * ((float)FENETRELARGEUR)/totalLargeur);
+        int realLongueur = (int)(((float)data.getCarte().getTailleCases()) * ((float)FENETRELONGUEUR)/totalLongueur);
         
         gui.reset();	// clear the window
         
@@ -107,22 +108,20 @@ public class Simulateur implements Simulable
         }
         
         // Affichage des incendies
-        Incendie[] incendies = data.getIncendies();
-        for(i=0; i<Array.getLength(incendies); i++) {
-        	gui.addGraphicalElement(new ImageElement( 	incendies[i].getPosition().getLigne() * realLargeur,
-        												incendies[i].getPosition().getColonne() * realLongueur,
-									                    fireName,
+        for(i=0; i<data.getNbIncendies(); i++) {
+        	gui.addGraphicalElement(new ImageElement( 	data.getIncendies(i).getPosition().getLigne() * realLargeur,
+        												data.getIncendies(i).getPosition().getColonne() * realLongueur,
+        												FIRENAME,
 									                    realLargeur,
 									                    realLongueur,
 									                    null ));
         }
         
         // Affichage des robots
-        Robot[] robots = data.getRobots();
-        for(i=0; i<Array.getLength(robots); i++) {
-        	gui.addGraphicalElement(new ImageElement( 	robots[i].getPosition().getLigne() * realLargeur,
-        												robots[i].getPosition().getColonne() * realLongueur,
-									                    robots[i].getName(),
+        for(i=0; i<data.getNbRobots(); i++) {
+        	gui.addGraphicalElement(new ImageElement( 	data.getRobots(i).getPosition().getLigne() * realLargeur,
+        												data.getRobots(i).getPosition().getColonne() * realLongueur,
+        												data.getRobots(i).getName(),
 									                    realLargeur,
 									                    realLongueur,
 									                    null ));

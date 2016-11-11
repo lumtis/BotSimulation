@@ -7,6 +7,9 @@ public class Case {
     private int colonne;
     private NatureTerrain nature;
 
+    public static boolean casesEgales(Case c1, Case c2) {
+    	return ((c1.ligne == c2.ligne) && (c1.colonne == c2.colonne));
+    }
 
     public Case()
     {

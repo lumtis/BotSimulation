@@ -2,12 +2,16 @@ package simulation;
 import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
+import simulation.Carte.Direction;
+
 import java.io.*;
 import java.util.*;
 
 public class DonneesSimulation {
     private Carte carte;
+    private int nbIncendies;
     private Incendie[] incendies;
+    private int nbRobots;
     private Robot[] robots;
 
     private static Scanner scanner;
@@ -120,15 +124,29 @@ public class DonneesSimulation {
         return carte;
     }
 
-    public Incendie[] getIncendies()
+    public int getNbIncendies() {
+    	return nbIncendies;
+    }
+    
+    public Incendie getIncendies(int n)
     {
-        return incendies;
+        return incendies[n];
     }
 
-    public Robot[] getRobots()
+    public int getNbRobots() {
+    	return nbRobots;
+    }
+    
+    public Robot getRobots(int n)
     {
-        return robots;
+        return robots[n];
     }
 
+    public boolean voisinExiste(Case src, Direction dir) {
+        return carte.voisinExiste(src, dir);
+    }
 
+    public Case getVoisin(Case src, Direction dir) {
+    	return carte.getVoisin(src, dir);
+    }
 }
