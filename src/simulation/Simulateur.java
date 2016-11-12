@@ -40,6 +40,12 @@ public class Simulateur implements Simulable
         this.gui = gui;
         gui.setSimulable(this);
 
+        
+        
+        System.out.println(gui.getParent().getComponentCount());
+        
+        
+        
         draw();
     }
 
@@ -136,7 +142,7 @@ public class Simulateur implements Simulable
     }
     
     public void incrementeDate() {
-    	dateSimulation++;
+    	
     }
     
     public long getDate() {
