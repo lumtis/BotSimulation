@@ -39,16 +39,13 @@ public class Simulateur implements Simulable
         
         this.gui = gui;
         gui.setSimulable(this);
-
-        
-        
-        System.out.println(gui.getParent().getComponentCount());
-        
-        
         
         draw();
     }
 
+    public DonneesSimulation getData() {
+    	return data;
+    }
 
     private String getImageName(Case.NatureTerrain nature) {
         switch(nature) {
@@ -73,7 +70,16 @@ public class Simulateur implements Simulable
     	int i;
     	Evenement tmp;
     	
-    	// On effectue toutles evenements liés à cette date
+    	// On effectue toutles evenements antérieur à la date
+    	if(ev.size() > 0) {
+    		while(ev.get(0).getDate() <= this.getDate()) {
+    			ev.get(0).execute();
+    			ev.remove(0);
+    			if(ev.size() == 0)
+    				break;
+    		}
+    	}
+    	
     	for(i = 0; i< ev.size(); i++) {
     		tmp = ev.get(i);
     		if(tmp.getDate() == this.getDate()) {
@@ -138,11 +144,20 @@ public class Simulateur implements Simulable
     
     // Ajouter un evenement
     public void ajouteEvenement(Evenement e) {
+    	int i;
+    	
+    	for(i = 0; i< ev.size(); i++) {
+    		if(e.getDate() < ev.get(i).getDate()) {
+    			ev.add(i, e);
+    			return;
+    		}
+    	}
+    	
     	ev.add(e);
     }
     
     public void incrementeDate() {
-    	
+    	dateSimulation++; // Une seconde de plus
     }
     
     public long getDate() {
