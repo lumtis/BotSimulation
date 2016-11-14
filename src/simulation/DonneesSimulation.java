@@ -16,7 +16,11 @@ public class DonneesSimulation {
 
     private static Scanner scanner;
 
+    /**
+     * \brief Analyse le fichier et rempli les objets
+     * \param nom de fichier
 
+     */
     public DonneesSimulation(String name) throws FileNotFoundException, DataFormatException {
         scanner = new Scanner(new File(name));
         scanner.useLocale(Locale.US);
@@ -60,7 +64,7 @@ public class DonneesSimulation {
         System.out.println(incendies[4].getIntensite());
         */
         // Robots
-        
+
         ignorerCommentaires();
         int nbRobots = scanner.nextInt();
         verifieLigneTerminee();
@@ -97,10 +101,12 @@ public class DonneesSimulation {
             }
             robots[i] = rob;
         }
-        
+
     }
 
-
+    /**
+     * \brief ignore les commentaires dans le fichier
+     */
     private void ignorerCommentaires() {
     	while(scanner.hasNext("#.*")) {
     		scanner.nextLine();
@@ -108,7 +114,7 @@ public class DonneesSimulation {
     }
 
     /**
-     * Verifie qu'il n'y a plus rien a lire sur cette ligne (int ou float).
+     * \brief Verifie qu'il n'y a plus rien a lire sur cette ligne (int ou float).
      * @throws ExceptionFormatDonnees
      */
 
@@ -119,33 +125,67 @@ public class DonneesSimulation {
         }
     }
 
+    /**
+     * \brief
+     * \return la carte
+     */
     public Carte getCarte()
     {
         return carte;
     }
 
+    /**
+     * \brief
+     * \return le nombre d'incendies
+     */
+
     public int getNbIncendies() {
     	return nbIncendies;
     }
-    
+
+
+    /**
+     * \brief
+     * \return le n ème Incendie
+     * \param n
+     */
+
     public Incendie getIncendies(int n)
     {
         return incendies[n];
     }
+    /**
+     * \brief
+     * \return le nombre d'incendies
+     */
 
     public int getNbRobots() {
     	return nbRobots;
     }
-    
+    /**
+     * \brief
+     * \return le n ème robot
+     * \ param n
+     */
     public Robot getRobots(int n)
     {
         return robots[n];
     }
 
+    /**
+     * \brief vérifie l'existence du voisin dans une carte
+     * \ return true s'l existe faut si non
+     * \ param la Case
+     *
+     */
     public boolean voisinExiste(Case src, Direction dir) {
         return carte.voisinExiste(src, dir);
     }
 
+    /**
+     * \cherche le voisin
+     * \return le voisin s'il existe, null si non
+     */
     public Case getVoisin(Case src, Direction dir) {
     	return carte.getVoisin(src, dir);
     }
