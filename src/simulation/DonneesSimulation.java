@@ -172,12 +172,7 @@ public class DonneesSimulation {
         return robots[n];
     }
 
-    /**
-     * \brief vérifie l'existence du voisin dans une carte
-     * \ return true s'l existe faut si non
-     * \ param la Case
-     *
-     */
+    
     public boolean voisinExiste(Case src, Direction dir) {
         return carte.voisinExiste(src, dir);
     }
