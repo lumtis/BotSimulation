@@ -48,6 +48,12 @@ public class Carte {
     }
 
 
+    /**
+     * \brief Regarde si un voisin existe
+     * \return true si voisin existe
+     * \param case source
+     * \param direction du voisin
+     */
     public boolean voisinExiste(Case src, Direction dir)
     {
         switch(dir)

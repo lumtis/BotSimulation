@@ -1,6 +1,8 @@
 package simulation;
 public abstract class Robot
 {
+	public enum Etat {RIEN, DEPLACERINCENDIE, ETEINDRE, VIDE, DEPLACEREAU, REMPLIR}
+	protected Etat e;
     protected Case position;
     protected int volume;
     protected int vitesse;

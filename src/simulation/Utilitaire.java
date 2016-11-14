@@ -11,6 +11,11 @@ public class Utilitaire {
 		return (long) (v/3.6);
 	}
 	
+	public static boolean isEau(Case c, DonneesSimulation d) {
+		
+		return (c.getNature() == NatureTerrain.EAU);
+	}
+	
 	public static boolean isIncendie(Case c, DonneesSimulation d) {
 		int i;
 		
@@ -36,6 +41,47 @@ public class Utilitaire {
 	}
 	
 	
+	public static boolean hasVoisinIncendie(Case c, DonneesSimulation d) {
+		for (Direction dir : Direction.values()) {
+			if(d.voisinExiste(c, dir))
+			{
+				if(isIncendie(d.getVoisin(c, dir), d))
+					return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	public static boolean hasVoisinEau(Case c, DonneesSimulation d) {
+		for (Direction dir : Direction.values()) {
+			if(d.voisinExiste(c, dir))
+			{
+				if(isEau(d.getVoisin(c, dir), d))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public static Case getDestination(Case dep, ArrayList<Direction> path, DonneesSimulation d) {
+		Case tmp;
+		int i;
+		
+		tmp = dep;
+		
+		for(i = 0; i < path.size(); i++) {
+			if(d.voisinExiste(tmp, path.get(i)))
+				tmp = d.getVoisin(tmp, path.get(i));
+			else
+				return null;
+		}
+		
+		return tmp;
+	}
+	
 	
 	private static double getCout(Case c, double[][] couts) {
 		return couts[c.getColonne()][c.getLigne()];
@@ -54,7 +100,6 @@ public class Utilitaire {
 		directions[c.getColonne()][c.getLigne()] = direction;
 		return directions;
 	}
-	
 	
 	
 	public static ArrayList<Direction> dijkstra(Robot r, LinkedList<Case> arr, DonneesSimulation d) {
