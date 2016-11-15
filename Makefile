@@ -38,6 +38,10 @@ testLecture:
 test2:
 	javac -d bin -sourcepath src src/Test2.java
 
+doc:
+	javadoc private gui.jar doc src/simulation/*.java
+
+
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
@@ -52,7 +56,7 @@ exeInvader:
 exeLecture:
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
 
-exe2: 
+exe2:
 	java -classpath bin Test2 cartes/carteSujet.map
 
 Dijk:

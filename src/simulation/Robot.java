@@ -80,7 +80,7 @@ public abstract class Robot
         	position = c;
         }
         else {
-			System.out.println("case en dehors de la carte")
+			System.out.println("case en dehors de la carte");
 		}
     }
 

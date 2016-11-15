@@ -6,13 +6,22 @@ import simulation.Carte.Direction;
 
 public class EvDeplacerEau extends EvDeplacerIncendie {
 
+	/**
+     * \brief constructeur Evenement EAU
+     * \param la date
+	 * \param le robot
+	 * \param liste des Direction
+     * \param le Simulateur
+     */
 	public EvDeplacerEau(long date, Robot r, ArrayList<Direction> p, Simulateur s) {
 		super(date, r, p, s);
 	}
-
+	/**
+     * \brief réalise l'évènement à la bsbonne date
+     */
 	void execute() {
 		Case next = d.getVoisin(robot.getPosition(), path.get(0));
-		
+
 		if(!Utilitaire.isRobot(next, d)) {
 			robot.setPosition(next);
 			path.remove(0);
@@ -26,11 +35,11 @@ public class EvDeplacerEau extends EvDeplacerIncendie {
 				path.remove(0);
 			}
 		}
-				
+
 		if(path.size() > 0) {
 			// On calcule temps temps que prend le robot pour se deplacer sur la case actuelle
 			long delay = Utilitaire.delayCase(robot, next, d);
-					
+
 			// On creer un nouvelle evvenement pour le prochaine mouvement
 			EvDeplacerEau nextMove = new EvDeplacerEau(s.getDate() + delay, robot, path, s);
 			s.ajouteEvenement(nextMove);

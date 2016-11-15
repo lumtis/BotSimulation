@@ -9,17 +9,27 @@ public class Chef {
 	private Simulateur s;
 	private Robot r;
 
-	
+	/**
+     * \brief constructeur de Chef
+     * \param toutes les données de simulation
+     * \param le Simulateur
+     * \param le robot
+     */
 	public Chef(DonneesSimulation d, Simulateur s, Robot r) {
 		this.d = d;
 		this.s = s;
 		this.r = r;
 	}
 
+
 	public void test() {
 		r.setPosition(d.getVoisin(r.getPosition(), Carte.Direction.EST));
 	}
 
+
+	/**
+     * \brief le chef manage les robots
+     */
 	public void inspecter() {
 		int i, j;
 		Utilitaire.PairDijkstra tmp, bestPath;

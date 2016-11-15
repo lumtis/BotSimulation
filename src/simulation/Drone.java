@@ -45,7 +45,7 @@ public class Drone extends Robot {
         return this.vitesse;
     }
 
-    
+
     /**
      * \brief rempli le reservoir du robot
      */
@@ -54,13 +54,15 @@ public class Drone extends Robot {
         //Attendre(30);
         this.volume =10000;
     }
-
+    /**
+     * \brief rempli le reservoir du robot
+     */
 	public void deverserEau(int vol) {
 		if(target != null) {
 			//EvEteindre ev = new EvEteindre(vol);
 		}
 	}
-	
+
 	@Override
 	public void allerChercherEau() {
 
