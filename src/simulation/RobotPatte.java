@@ -3,7 +3,12 @@ package simulation;
 import simulation.Case.NatureTerrain;
 
 public class RobotPatte extends Robot {
-
+    /**
+     * \brief constructeur robot patte
+     * \param sa case
+     * \param sa vitesse
+     * \param le Simulateur
+     */
     public RobotPatte(Case c, int vit, Simulateur s) {
         super(c, vit, s);
         if (vit == -1) {
@@ -14,21 +19,24 @@ public class RobotPatte extends Robot {
     public String getName() {
     	return "res/robotpatte.jpg";
     }
-    
+
 
 	@Override
 	public void deverserEau(int vol) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
 	@Override
 	public void allerChercherEau() {
 		// TODO Auto-generated method stub
-		
+
 	}
-    
+    /**
+     * \brief
+     * \return vitesse
+     */
     public double getVitesse(NatureTerrain n){
         this.vitesse =30;
         switch(n){
@@ -37,10 +45,10 @@ public class RobotPatte extends Robot {
             default: return this.vitesse;
         }
     }
-    
+
     public void remplirReservoir () {
         return;
     }
-    
+
 
 }

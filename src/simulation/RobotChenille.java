@@ -4,17 +4,27 @@ import simulation.Case.NatureTerrain;
 
 public class RobotChenille extends Robot {
 
+    /**
+     * \brief constructeur robot Chenilel
+     * \param sa case
+     * \param sa vitesse
+     * \param le Simulateur
+     */
     public RobotChenille(Case c, int vit, Simulateur s) {
         super(c, vit, s);
         if (vit == -1) {
             this.setVitesse(60);
         }
     }
-    
+
     public String getName() {
     	return "res/robotchenille.png";
     }
 
+    /**
+     * \brief
+     * \return la vitesse
+     */
     public double getVitesse (NatureTerrain n) {
         if (this.vitesse == -1 ) {
             this.vitesse = 60;
@@ -33,8 +43,11 @@ public class RobotChenille extends Robot {
                 return this.vitesse;
         }
     }
-    
-    
+
+    /**
+     * \brief met à jour le reservoir
+     */
+
     public void remplirReservoir () {
         // TODO SLUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();
@@ -45,13 +58,13 @@ public class RobotChenille extends Robot {
 	@Override
 	public void deverserEau(int vol) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void allerChercherEau() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
