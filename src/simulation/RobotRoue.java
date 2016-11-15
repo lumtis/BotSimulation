@@ -4,8 +4,8 @@ import simulation.Case.NatureTerrain;
 
 public class RobotRoue extends Robot {
 
-    public RobotRoue(Case c, int vit) {
-        super(c, vit);
+    public RobotRoue(Case c, int vit, Simulateur s) {
+        super(c, vit, s);
         if (vit == -1) {
             this.setVitesse(80);
         }
@@ -26,6 +26,8 @@ public class RobotRoue extends Robot {
             default : return 0;
         }
     }
+    
+    
     public void remplirReservoir () {
         // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();
@@ -33,15 +35,11 @@ public class RobotRoue extends Robot {
         this.volume =5000;
     }
 
-
-
 	@Override
 	public void deverserEau(int vol) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 
 	@Override
 	public void allerChercherEau() {

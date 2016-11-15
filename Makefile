@@ -41,7 +41,7 @@ test2:
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeInvader
 exeSimulateur:
-	java -classpath bin:bin/gui.jar LancerSimulateur cartes/desertOfDeath-20x20.map
+	java -classpath bin:bin/gui.jar LancerSimulateur cartes/carteSujet.map
 
 exeInvader:
 	java -classpath bin:bin/gui.jar TestInvader

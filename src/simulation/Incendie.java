@@ -1,14 +1,16 @@
 package simulation;
 public class Incendie
 {
+	public enum EtatIncendie {LIBRE, OCCUPE, ETEINT}
     private Case position;
     private int intensite;
-
+    private EtatIncendie e;
 
     public Incendie(Case p, int intensite)
     {
         this.position = p;
         this.intensite = intensite;
+        e = EtatIncendie.LIBRE;
     }
 
     public Case getPosition()
@@ -18,5 +20,17 @@ public class Incendie
 
     public int getIntensite() {
         return this.intensite;
+    }
+    
+    public void setIntensite(int i) {
+    	intensite = i;
+    }
+    
+    public EtatIncendie getEtat() {
+    	return e;
+    }
+    
+    public void setEtat(EtatIncendie e) {
+    	this.e = e;
     }
 }

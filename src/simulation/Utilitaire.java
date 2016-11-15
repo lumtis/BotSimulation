@@ -7,9 +7,37 @@ import simulation.Carte.Direction;
 import simulation.Case.NatureTerrain;
 
 public class Utilitaire {
+	public static class PairDijkstra {
+	    private ArrayList<Direction> path;
+	    private double cout;
+
+	    public PairDijkstra(ArrayList<Direction> first, double second) {
+	        this.path = first;
+	        this.cout = second;
+	    }
+
+	    public ArrayList<Direction> getPath() {
+	        return path;
+	    }
+
+	    public double getCout() {
+	        return cout;
+	    }
+	}
+	
+	
 	public static long metreSeconde(long v) {
 		return (long) (v/3.6);
 	}
+	
+	public static long delayCase(Robot r, Case c, DonneesSimulation d) {
+		long vit = Utilitaire.metreSeconde((long) r.getVitesse(c.getNature()));
+		long dist = d.getCarte().getTailleCases();
+		long delay = dist/vit;
+		
+		return delay;
+	}
+	
 	
 	public static boolean isEau(Case c, DonneesSimulation d) {
 		
@@ -102,7 +130,7 @@ public class Utilitaire {
 	}
 	
 	
-	public static ArrayList<Direction> dijkstra(Robot r, LinkedList<Case> arr, DonneesSimulation d) {
+	public static PairDijkstra dijkstra(Robot r, LinkedList<Case> arr, DonneesSimulation d) {
 		double[][] couts = new double[d.getCarte().getNbColonnes()][d.getCarte().getNbLignes()];
 		Direction[][] directions = new Direction[d.getCarte().getNbColonnes()][d.getCarte().getNbLignes()];
 		LinkedList<Case> caseFile = new LinkedList<Case>();
@@ -111,8 +139,10 @@ public class Utilitaire {
 		int i, j;
 		
 		for(i=0; i<arr.size(); i++) {
-			if(Case.casesEgales(r.getPosition(), arr.get(i)))
-				return ret;
+			if(Case.casesEgales(r.getPosition(), arr.get(i))) {
+				PairDijkstra cheminVide = new PairDijkstra(ret, 0);
+				return cheminVide;
+			}
 		}
 		if(r.getVitesse(r.getPosition().getNature()) == 0)
 			return null;
@@ -200,8 +230,10 @@ public class Utilitaire {
 			tmp = d.getVoisin(tmp, getDirection(tmp, directions));
 		}
 		
-		return ret;
+		return new PairDijkstra(ret, getCout(bestArr, couts));
 	}
+	
+	
 	
 	
 	public static ArrayList<Direction> eauPlusProche(Robot r, DonneesSimulation d) {
@@ -221,9 +253,10 @@ public class Utilitaire {
 		}
 		
 		// on effectue le dijkstra
-		return dijkstra(r, points, d);
+		return dijkstra(r, points, d).getPath();
 	}
 	
+
 	// Le drone doit aller sur l'eau
 	public static ArrayList<Direction> eauPlusProche(Drone r, DonneesSimulation d) {
 		LinkedList<Case> points = new LinkedList<Case>();
@@ -239,7 +272,7 @@ public class Utilitaire {
 		}
 		
 		// on effectue le dijkstra
-		return dijkstra(r, points, d);
+		return dijkstra(r, points, d).getPath();
 	}
 	
 	public static ArrayList<Direction> incendiePlusProche(Robot r, DonneesSimulation d) {
@@ -255,7 +288,7 @@ public class Utilitaire {
 		}
 		
 		// on effectue le dijkstra
-		return dijkstra(r, points, d);
+		return dijkstra(r, points, d).getPath();
 	}
 }
 

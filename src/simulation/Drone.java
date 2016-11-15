@@ -4,8 +4,8 @@ import simulation.Case.NatureTerrain;
 
 public class Drone extends Robot {
 
-    public Drone(Case c, int vit) {
-        super(c, vit);
+    public Drone(Case c, int vit, Simulateur s) {
+        super(c, vit, s);
         if (vit == -1) {
             this.setVitesse(100);
         }
@@ -27,21 +27,22 @@ public class Drone extends Robot {
         //return vitesse
         return this.vitesse;
     }
+    
+    
     public void remplirReservoir () {
-        // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();
         //Attendre(30);
         this.volume =10000;
     }
 
-
 	public void deverserEau(int vol) {
-		// TODO Auto-generated method stub
-
+		if(target != null) {
+			//EvEteindre ev = new EvEteindre(vol);
+		}
 	}
+	
 	@Override
 	public void allerChercherEau() {
-		// TODO Auto-generated method stub
 
 	}
 

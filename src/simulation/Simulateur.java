@@ -25,7 +25,7 @@ public class Simulateur implements Simulable
     {
         // Recupération des données
         try {
-			data = new DonneesSimulation(name);
+			data = new DonneesSimulation(name, this);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,6 +41,8 @@ public class Simulateur implements Simulable
         gui.setSimulable(this);
         
         draw();
+        Chef test = new Chef(data, this, data.getRobots(0));
+    	test.test();
     }
 
     public DonneesSimulation getData() {
@@ -110,8 +112,8 @@ public class Simulateur implements Simulable
         // Affichage de la carte
         for(i=0; i<data.getCarte().getNbLignes(); i++) {
             for(j=0; j<data.getCarte().getNbColonnes(); j++) {
-                gui.addGraphicalElement(new ImageElement( i * realLargeur,
-                                                          j * realLongueur,
+                gui.addGraphicalElement(new ImageElement( j * realLongueur,
+                										  i * realLargeur,
                                                           getImageName(data.getCarte().getCase(i, j).getNature()),
                                                           realLargeur,
                                                           realLongueur,
@@ -121,8 +123,8 @@ public class Simulateur implements Simulable
         
         // Affichage des incendies
         for(i=0; i<data.getNbIncendies(); i++) {
-        	gui.addGraphicalElement(new ImageElement( 	data.getIncendies(i).getPosition().getLigne() * realLargeur,
-        												data.getIncendies(i).getPosition().getColonne() * realLongueur,
+        	gui.addGraphicalElement(new ImageElement( 	data.getIncendies(i).getPosition().getColonne() * realLargeur,
+        												data.getIncendies(i).getPosition().getLigne() * realLongueur,
         												FIRENAME,
 									                    realLargeur,
 									                    realLongueur,
@@ -131,8 +133,8 @@ public class Simulateur implements Simulable
         
         // Affichage des robots
         for(i=0; i<data.getNbRobots(); i++) {
-        	gui.addGraphicalElement(new ImageElement( 	data.getRobots(i).getPosition().getLigne() * realLargeur,
-        												data.getRobots(i).getPosition().getColonne() * realLongueur,
+        	gui.addGraphicalElement(new ImageElement( 	data.getRobots(i).getPosition().getColonne() * realLargeur,
+        												data.getRobots(i).getPosition().getLigne() * realLongueur,
         												data.getRobots(i).getName(),
 									                    realLargeur,
 									                    realLongueur,

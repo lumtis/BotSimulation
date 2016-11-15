@@ -4,8 +4,8 @@ import simulation.Case.NatureTerrain;
 
 public class RobotChenille extends Robot {
 
-    public RobotChenille(Case c, int vit) {
-        super(c, vit);
+    public RobotChenille(Case c, int vit, Simulateur s) {
+        super(c, vit, s);
         if (vit == -1) {
             this.setVitesse(60);
         }
@@ -33,6 +33,8 @@ public class RobotChenille extends Robot {
                 return this.vitesse;
         }
     }
+    
+    
     public void remplirReservoir () {
         // TODO SLUCAAAAAAAAAAAS faut que tu écives Attendre
         allerChercherEau();

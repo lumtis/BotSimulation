@@ -17,7 +17,7 @@ public class DonneesSimulation {
     private static Scanner scanner;
 
 
-    public DonneesSimulation(String name) throws FileNotFoundException, DataFormatException {
+    public DonneesSimulation(String name, Simulateur sim) throws FileNotFoundException, DataFormatException {
         scanner = new Scanner(new File(name));
         scanner.useLocale(Locale.US);
         // Cartes
@@ -44,7 +44,7 @@ public class DonneesSimulation {
 
         // Incendie
         ignorerCommentaires();
-        int nbIncendies = scanner.nextInt();
+        nbIncendies = scanner.nextInt();
         this.incendies = new Incendie[nbIncendies];
         verifieLigneTerminee();
         for (int i = 0 ; i < nbIncendies; i++) {
@@ -62,7 +62,7 @@ public class DonneesSimulation {
         // Robots
         
         ignorerCommentaires();
-        int nbRobots = scanner.nextInt();
+        nbRobots = scanner.nextInt();
         verifieLigneTerminee();
         this.robots = new Robot[nbRobots];
         for (int i = 0 ; i < nbRobots; i++) {
@@ -81,23 +81,24 @@ public class DonneesSimulation {
             Robot rob;
             switch (type) {
                 case "DRONE":
-                    rob = new Drone(this.carte.getCase(lig,col),vit);
+                    rob = new Drone(this.carte.getCase(lig,col),vit, sim);
                     break;
                 case "CHENILLES":
-                    rob = new RobotChenille(this.carte.getCase(lig,col),vit);
+                    rob = new RobotChenille(this.carte.getCase(lig,col),vit, sim);
                     break;
                 case "PATTES":
-                    rob = new RobotPatte(this.carte.getCase(lig,col),vit);
+                    rob = new RobotPatte(this.carte.getCase(lig,col),vit, sim);
                     break;
                 case "ROUES":
-                    rob = new RobotRoue(this.carte.getCase(lig,col),vit);
+                    rob = new RobotRoue(this.carte.getCase(lig,col),vit, sim);
                     break;
                 default:
                     throw new DataFormatException("DataFormatException");
             }
             robots[i] = rob;
         }
-        
+         //System.out.println(getNbIncendies());
+         //System.out.println(getNbRobots());
     }
 
 
