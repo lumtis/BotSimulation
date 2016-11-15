@@ -11,6 +11,7 @@ public class Incendie
     {
         this.position = p;
         this.intensite = intensite;
+        this.intensiteDepard = intensite;
         e = EtatIncendie.LIBRE;
     }
 

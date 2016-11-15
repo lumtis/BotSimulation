@@ -15,6 +15,12 @@ public abstract class Robot
     protected Incendie target;
     protected Simulateur s;
 
+	/**
+     * \brief constructeur robots
+     * \param sa case
+     * \param sa vitesse
+     * \param le Simulateur
+     */
     public Robot(Case c, int vit, Simulateur s) {
         this.vitesse = vit;
         this.position = c;
@@ -22,32 +28,52 @@ public abstract class Robot
         target = null;
         this.s = s;
     }
-
+	/**
+     * \briefmet à jour la Direction
+     * \param l'incendie
+     */
     public void setTarget(Incendie i) {
     	target = i;
     }
-    
+    /**
+     * \brief
+     * \return l'incendie affectée au robot
+     */
     public Incendie getTarget() {
     	return target;
     }
+
+	/**
+     * \brief met à jour la vitesse
+     * \param la vitesse
+     */
 
     public void setVitesse(int vit) {
         this.vitesse = vit;
     }
 
+	/**
+     * \brief
+     * \return la vitesse
+     */
     public int getVitesse() {
         return this.vitesse;
     }
-
+	/**
+     * \brief
+     * \return la position
+     */
     public Case getPosition()
     {
         return position;
     }
-
+	/**
+     * \brief met à jour la position
+     * \param la case
+     */
     public void setPosition(Case c)
     {
-        // TODO: Verifier si position valide
-        position = c;
+    	position = c;
     }
     
     public int getVolume() {
@@ -58,10 +84,19 @@ public abstract class Robot
     	volume = v;
     }
     
+
+	/**
+     * \brief
+     * \return l'état du robot
+     */
     public EtatRobot getEtat() {
     	return e;
     }
-    
+
+	/**
+     * \brief met à jour l'état du robot
+     * \param le nouvel état
+     */
     public void setEtat(EtatRobot e) {
     	// Debug
     	System.out.print("Robot ");
@@ -94,7 +129,7 @@ public abstract class Robot
     }
     
     abstract public String getName();
-    
+
     abstract public double getVitesse(Case.NatureTerrain n);
 
     abstract public void deverserEau(int vol);

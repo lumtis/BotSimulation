@@ -3,7 +3,12 @@ package simulation;
 import simulation.Case.NatureTerrain;
 
 public class RobotRoue extends Robot {
-
+    /**
+     * \brief constructeur robot ROUES
+     * \param sa case
+     * \param sa vitesse
+     * \param le Simulateur
+     */
     public RobotRoue(Case c, int vit, Simulateur s) {
         super(c, vit, s);
         if (vit == -1) {
@@ -16,6 +21,10 @@ public class RobotRoue extends Robot {
     	return "res/robotroue.png";
     }
 
+    /**
+     * \brief
+     * \return vitesse
+     */
     public double getVitesse (NatureTerrain n) {
         switch(n){
             case TERRAIN_LIBRE :
@@ -27,7 +36,11 @@ public class RobotRoue extends Robot {
             default : return 0;
         }
     }
+
     
+    /**
+     * \brief met à jour le reservoir
+     */
     public void remplirReservoir () {
     	EvRemplir event = new EvRemplir(s.getDate() + 300, this, 2000);
 		s.ajouteEvenement(event);

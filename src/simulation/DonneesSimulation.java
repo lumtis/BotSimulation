@@ -33,14 +33,10 @@ public class DonneesSimulation {
         for (int lig = 0; lig < nbLignes; lig++) {
             for (int col = 0; col < nbColonnes; col++) {
                 ignorerCommentaires();
-                //Case nCase = new Case(lig, col, (Case.NatureTerrain) scanner.next());
                 Case nCase = new Case(lig, col, Case.NatureTerrain.valueOf(scanner.next()));
                 this.carte.setCase(lig, col, nCase);
                 verifieLigneTerminee();
-                /* Test
-                System.out.println(lig + " " + col);
-                System.out.println (this.carte.getCase(lig,col).getNature());
-                */
+
             }
         }
 
@@ -58,9 +54,6 @@ public class DonneesSimulation {
             incendies[i] = new Incendie(this.carte.getCase(lig,col),inte);
         }
 
-        /* Test
-        System.out.println(incendies[4].getIntensite());
-        */
         // Robots
 
         ignorerCommentaires();
@@ -169,7 +162,7 @@ public class DonneesSimulation {
         return robots[n];
     }
 
-    
+
     public boolean voisinExiste(Case src, Direction dir) {
         return carte.voisinExiste(src, dir);
     }

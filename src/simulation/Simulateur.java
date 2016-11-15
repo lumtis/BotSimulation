@@ -1,15 +1,16 @@
 package simulation;
-import gui.*;
-
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
+import gui.GUISimulator;
+import gui.ImageElement;
+import gui.Simulable;
 
-public class Simulateur implements Simulable
-{
+
+public class Simulateur implements Simulable {
     private DonneesSimulation data;
     private GUISimulator gui;
     private long dateSimulation;
@@ -21,7 +22,12 @@ public class Simulateur implements Simulable
     public static final int FENETRELARGEUR = 800;
     public static final int FENETRELONGUEUR = 800;
     public static final String FIRENAME = "res/fire.gif";
-    
+
+    /**
+     * \brief constructeur Simulateur
+     * \param interface graphique
+     * \param fichier
+     */
     public Simulateur(GUISimulator gui, String name)
     {
         // Recupération des données
@@ -38,10 +44,9 @@ public class Simulateur implements Simulable
         dateSimulation = 0;
         ev = new ArrayList<Evenement>();
         chef = new Chef(data, this);
-        
         this.gui = gui;
         gui.setSimulable(this);
-        
+
         draw();
     }
 
@@ -71,7 +76,7 @@ public class Simulateur implements Simulable
     public void next() {
     	int i;
     	Evenement tmp;
-    	
+
     	// On effectue toutles evenements antérieur à la date
     	if(ev.size() > 0) {
     		while(ev.get(0).getDate() <= this.getDate()) {
@@ -81,7 +86,7 @@ public class Simulateur implements Simulable
     				break;
     		}
     	}
-    	
+
     	for(i = 0; i< ev.size(); i++) {
     		tmp = ev.get(i);
     		if(tmp.getDate() == this.getDate()) {
@@ -90,7 +95,7 @@ public class Simulateur implements Simulable
     			i--;
     		}
     	}
-    	
+
         draw();
     	incrementeDate();
     	
@@ -105,15 +110,19 @@ public class Simulateur implements Simulable
         draw();
     }
 
+    /**
+     * \brief dessine la carte
+     */
+
     private void draw() {
         int i, j;
         float totalLargeur = data.getCarte().getTailleCases() * data.getCarte().getNbColonnes();
         float totalLongueur = data.getCarte().getTailleCases() * data.getCarte().getNbLignes();
         int realLargeur = (int)(((float)data.getCarte().getTailleCases()) * ((float)FENETRELARGEUR)/totalLargeur);
         int realLongueur = (int)(((float)data.getCarte().getTailleCases()) * ((float)FENETRELONGUEUR)/totalLongueur);
-        
+
         gui.reset();	// clear the window
-        
+
         // Affichage de la carte
         for(i=0; i<data.getCarte().getNbLignes(); i++) {
             for(j=0; j<data.getCarte().getNbColonnes(); j++) {
@@ -125,7 +134,7 @@ public class Simulateur implements Simulable
                                                           null ));
             }
         }
-        
+
         // Affichage des incendies
         for(i=0; i<data.getNbIncendies(); i++) {
         	if(data.getIncendies(i).getEtat() != Incendie.EtatIncendie.ETEINT) {
@@ -137,7 +146,7 @@ public class Simulateur implements Simulable
 										                    null ));
         	}
         }
-        
+
         // Affichage des robots
         for(i=0; i<data.getNbRobots(); i++) {
         	gui.addGraphicalElement(new ImageElement( 	data.getRobots(i).getPosition().getColonne() * realLargeur,
@@ -146,33 +155,37 @@ public class Simulateur implements Simulable
 									                    realLargeur,
 									                    realLongueur,
 									                    null ));
-        	
-        
+
+
         }
     }
-    
-    // Ajouter un evenement
+
+
+    /**
+     * \brief ajoute un évèvenement à la liste
+     * \param un évènement
+     */
     public void ajouteEvenement(Evenement e) {
     	int i;
-    	
+
     	for(i = 0; i< ev.size(); i++) {
     		if(e.getDate() < ev.get(i).getDate()) {
     			ev.add(i, e);
     			return;
     		}
     	}
-    	
+
     	ev.add(e);
     }
-    
+
     public void incrementeDate() {
     	dateSimulation++; // Une seconde de plus
     }
-    
+
     public long getDate() {
     	return dateSimulation;
     }
-    
+
     public boolean simulationTerminee() {
     	return false;
     }
