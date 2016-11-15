@@ -3,11 +3,20 @@ package simulation;
 public class Carte {
     public enum Direction {NORD, SUD, EST, OUEST}
 
+
     private int tailleCase;
     private int nbLignes;
     private int nbColonnes;
     private Case[][] matrice;
 
+
+
+    /**
+     * \brief constructeur de carte
+     * \param taille des cases
+     * \param nombre de lignes
+     * \param nombre de colonnes
+     */
     public Carte(int tailleCase, int nbLignes, int nbColonnes)
     {
         this.tailleCase = tailleCase;
@@ -21,27 +30,58 @@ public class Carte {
 
     }
 
+
+    /**
+     * \brief
+     * \return le nombre de ligne
+     */
     public int getNbLignes()
     {
         return nbLignes;
     }
 
-    public int getNbColonnes()
+
+
+
+    /**
+     * \brief
+     * \return le nombre de colonnes
+     */
+
+     public int getNbColonnes()
     {
         return nbColonnes;
     }
+
+    /**
+     * \brief
+     * \return la taille des cases de la carte
+     */
 
     public int getTailleCases()
     {
         return tailleCase;
     }
 
+
+    /**
+     * \brief cherche la case par ligne et colonne
+     * \return la case correspondante
+     * \param la ligne
+     * \param la colonne
+     */
+
     public Case getCase(int lig, int col)
     {
         return matrice[lig][col];
     }
 
-
+    /**
+     * \brief constructeur case
+     * \param la ligne
+     * \param la colonne
+     * \param la case
+     */
     public void setCase(int lig, int col, Case nCase)
     {
         this.matrice[lig][col] = nCase;
@@ -80,6 +120,13 @@ public class Carte {
 
         return true;
     }
+
+    /**
+     * \brief cherche le voisin
+     * \return le voisin s'il existe, null si non
+     * \param case source
+     * \param direction du voisin
+     */
 
     public Case getVoisin(Case src, Direction dir) {
         if(voisinExiste(src, dir)) {

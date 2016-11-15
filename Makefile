@@ -29,6 +29,9 @@ simulateur:
 testInvader:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
 
+testDijkstra:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestDijkstra.java
+
 testLecture:
 	javac -d bin -sourcepath src src/TestLecteurDonnees.java
 
@@ -51,6 +54,9 @@ exeLecture:
 
 exe2: 
 	java -classpath bin Test2 cartes/carteSujet.map
+
+Dijk:
+	java -classpath bin TestDijkstra cartes/carteSujet.map
 
 clean:
 	rm -rf bin/*.class
