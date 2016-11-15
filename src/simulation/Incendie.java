@@ -6,7 +6,11 @@ public class Incendie
     private int intensiteDepard;
     private int intensite;
     private EtatIncendie e;
-
+	/**
+     * \brief constructeur incendie
+	 * \param la case
+	 * \param l'intensité
+     */
     public Incendie(Case p, int intensite)
     {
         this.position = p;
@@ -15,27 +19,43 @@ public class Incendie
         e = EtatIncendie.LIBRE;
     }
 
+	/**
+     * \brief
+     * \return la position de l'incendie
+     */
     public Case getPosition()
     {
-        return position;
+        return this.position;
     }
 
+	/**
+     * \brief
+     * \return la position de l'incendie
+     */
     public int getIntensite() {
         return this.intensite;
     }
-    
+
     public int getIntensiteDepard() {
     	return intensiteDepard;
     }
-    
-    public void setIntensite(int i) {
+
+	/**
+     * \brief initialise l'intensité
+     */
+	 public void setIntensite(int i) {
     	intensite = i;
     }
-    
+	/**
+     * \brief
+	 / \ return l'état de l'incendie
+     */
     public EtatIncendie getEtat() {
     	return e;
     }
-    
+	/**
+     * \brief initialise l'états
+     */
     public void setEtat(EtatIncendie e) {
     	this.e = e;
     }

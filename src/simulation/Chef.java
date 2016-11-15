@@ -8,8 +8,16 @@ public class Chef {
 	private DonneesSimulation d;
 	private Simulateur s;
 	private boolean fin;
-	
+
+
+	/**
+     * \brief constructeur de Chef
+     * \param toutes les données de simulation
+     * \param le Simulateur
+     * \param le robot
+     */
 	public Chef(DonneesSimulation d, Simulateur s) {
+
 		this.d = d;
 		this.s = s;
 		fin = false;
@@ -18,7 +26,10 @@ public class Chef {
 	public boolean isTerminate() {
 		return fin;
 	}
-	
+
+	/**
+     * \brief le chef manage les robots
+     */
 	public void inspecter() {
 		int i, j;
 		Utilitaire.PairDijkstra tmp, bestPath;
@@ -26,7 +37,6 @@ public class Chef {
 		boolean tousEteint;
 
 		for(i=0, tousEteint=true; i<d.getNbIncendies(); i++) {
-			
 			if(d.getIncendies(i).getEtat() == Incendie.EtatIncendie.LIBRE) {
 				LinkedList<Case> voisins = new LinkedList<Case>();
 

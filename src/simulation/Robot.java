@@ -75,15 +75,15 @@ public abstract class Robot
     {
     	position = c;
     }
-    
+
     public int getVolume() {
     	return volume;
     }
-    
+
     public void setVolume(int v) {
     	volume = v;
-    }
-    
+	}
+
 
 	/**
      * \brief
@@ -103,7 +103,7 @@ public abstract class Robot
     	System.out.print(this.getName());
     	System.out.print(" ");
     	System.out.println(e);
-    	
+
     	this.e = e;
     }
 
@@ -118,7 +118,7 @@ public abstract class Robot
     		deverserEau(this.volume);
     	}
     }
-    
+
     public void allerChercherEau() {
     	ArrayList<Direction> path = Utilitaire.eauPlusProche(this, s.getData());
     	long delay = Utilitaire.delayCase(this, this.getPosition(), s.getData());
@@ -127,7 +127,7 @@ public abstract class Robot
 		EvDeplacerEau nextMove = new EvDeplacerEau(s.getDate() + delay, this, path, s);
 		s.ajouteEvenement(nextMove);
     }
-    
+
     abstract public String getName();
 
     abstract public double getVitesse(Case.NatureTerrain n);

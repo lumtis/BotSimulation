@@ -49,7 +49,7 @@ public class Drone extends Robot {
         return this.vitesse;
     }
 
-    
+
     /**
      * \brief rempli le reservoir du robot
      */
@@ -57,15 +57,25 @@ public class Drone extends Robot {
     	EvRemplir event = new EvRemplir(s.getDate() + 1800, this, 10000);
 		s.ajouteEvenement(event);
     }
-    
 
-	public void deverserEau(int vol) {	
+    /**
+     * \brief rempli le reservoir du robot
+     */
+	public void deverserEau(int vol) {
+
+
+
+	public void deverserEau(int vol) {
+
 		if(target != null) {
 			EvEteindre event = new EvEteindre(s.getDate() + 30, 10000, this);
 			s.ajouteEvenement(event);
 		}
 	}
-	
+
+
+	@Override
+
 	public void allerChercherEau() {
 	    ArrayList<Direction> path = Utilitaire.eauPlusProche(this, s.getData());
 	    long delay = Utilitaire.delayCase(this, this.getPosition(), s.getData());

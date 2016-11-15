@@ -1,9 +1,16 @@
 package simulation;
 
 public class EvRemplir extends Evenement {
+
+	/**
+     * \brief constructeur évènement renmplir
+     * \param date
+     */
+	public EvRemplir(long date) {
+
 	Robot robot;
 	int vol;
-	
+
 	public EvRemplir(long date, Robot r, int vol) {
 		super(date);
 		robot = r;

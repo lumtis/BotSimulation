@@ -27,6 +27,10 @@ simulateur:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/LancerSimulateur.java
 
 
+doc:
+	javadoc private gui.jar doc src/simulation/*.java
+
+
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
