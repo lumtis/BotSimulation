@@ -18,7 +18,7 @@ public class TestDijkstra {
         LinkedList<Case> chaine = new LinkedList<Case>();
         chaine.add(new Case());
         DonneesSimulation d =  new DonneesSimulation(args[0]);
-        ArrayList<Carte.Direction> list = Utilitaire.dijkstra(d.getRobots(1),chaine,d);
+        ArrayList<Carte.Direction> list = Utilitaire.dijkstra(d.getRobots(1),chaine,d).getPath();
         Object[] arr = list.toArray();
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);

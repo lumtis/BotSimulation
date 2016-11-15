@@ -48,7 +48,8 @@ public class EvDeplacerIncendie extends Evenement {
 				//S'il est arrivé on le fait éteindre son incendie
 				robot.setEtat(Robot.EtatRobot.ETEINDRE);
 
-				// ...
+				robot.eteindreIncendie();
+
 			}
 		}
 		else {
@@ -62,11 +63,32 @@ public class EvDeplacerIncendie extends Evenement {
 				}
 			}
 
+
 			path = Utilitaire.dijkstra(robot, voisins, d).getPath();
 			if(path != null) {
+
+
+			Utilitaire.PairDijkstra tmp = Utilitaire.dijkstra(robot, voisins, d);
+			if(tmp != null) {
+				path = tmp.getPath();
 				next = d.getVoisin(robot.getPosition(), path.get(0));
 				robot.setPosition(next);
 				path.remove(0);
+
+				// Si le robot n'a pas encore fini son trajet
+				if(path.size() > 0) {
+					// On calcule temps temps que prend le robot pour se deplacer sur la case actuelle
+					long delay = Utilitaire.delayCase(robot, next, d);
+
+					// On creer un nouvelle evvenement pour le prochaine mouvement
+					EvDeplacerIncendie nextMove = new EvDeplacerIncendie(s.getDate() + delay, robot, path, s);
+					s.ajouteEvenement(nextMove);
+				}
+				else {
+					//S'il est arrivé on le fait éteindre son incendie
+					robot.setEtat(Robot.EtatRobot.ETEINDRE);
+					robot.eteindreIncendie();
+				}
 			}
 			else {
 				robot.setEtat(Robot.EtatRobot.RIEN);

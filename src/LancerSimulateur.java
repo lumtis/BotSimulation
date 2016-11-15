@@ -11,5 +11,7 @@ public class LancerSimulateur {
         GUISimulator gui = new GUISimulator(Simulateur.FENETRELARGEUR, Simulateur.FENETRELONGUEUR, Color.BLACK);
         // crée l'invader, en l'associant à la fenêtre graphique précédente
         Simulateur sim = new Simulateur(gui, args[0]);
+        
+        
     }
 }

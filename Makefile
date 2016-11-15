@@ -48,7 +48,7 @@ doc:
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeInvader
 exeSimulateur:
-	java -classpath bin:bin/gui.jar LancerSimulateur cartes/carteSujet.map
+	java -classpath bin:bin/gui.jar LancerSimulateur cartes/spiralOfMadness-50x50.map
 
 exeInvader:
 	java -classpath bin:bin/gui.jar TestInvader

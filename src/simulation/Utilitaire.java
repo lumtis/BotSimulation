@@ -83,7 +83,7 @@ public class Utilitaire {
 		int i;
 
 		for(i=0; i<d.getNbIncendies(); i++) {
-			if(Case.casesEgales(d.getIncendies(i).getPosition(), c)) {
+			if(Case.casesEgales(d.getIncendies(i).getPosition(), c) && d.getIncendies(i).getEtat() != Incendie.EtatIncendie.ETEINT) {
 				return true;
 			}
 		}
@@ -331,7 +331,12 @@ public class Utilitaire {
 	public static ArrayList<Direction> eauPlusProche(Robot r, DonneesSimulation d) {
 		LinkedList<Case> points = new LinkedList<Case>();
 		int i, j;
+<<<<<<< HEAD
 
+=======
+		PairDijkstra ret;
+		
+>>>>>>> f43dc6944345321d2902fd0677a220fa0e196a11
 		// On ajoute tout les points à proximité de l'eau
 		for(i=0; i<d.getCarte().getNbLignes(); i++) {
 			for(j=0; j<d.getCarte().getNbColonnes(); j++) {
@@ -345,7 +350,11 @@ public class Utilitaire {
 		}
 
 		// on effectue le dijkstra
-		return dijkstra(r, points, d).getPath();
+		ret = dijkstra(r, points, d);
+		if(ret == null)
+			return null;
+		else
+			return ret.getPath();
 	}
 
 
@@ -358,7 +367,12 @@ public class Utilitaire {
 	public static ArrayList<Direction> eauPlusProche(Drone r, DonneesSimulation d) {
 		LinkedList<Case> points = new LinkedList<Case>();
 		int i, j;
+<<<<<<< HEAD
 
+=======
+		PairDijkstra ret;
+		
+>>>>>>> f43dc6944345321d2902fd0677a220fa0e196a11
 		// On ajoute tout les points à proximité de l'eau
 		for(i=0; i<d.getCarte().getNbLignes(); i++) {
 			for(j=0; j<d.getCarte().getNbColonnes(); j++) {
@@ -369,7 +383,12 @@ public class Utilitaire {
 		}
 
 		// on effectue le dijkstra
-		return dijkstra(r, points, d).getPath();
+		// on effectue le dijkstra
+		ret = dijkstra(r, points, d);
+		if(ret == null)
+			return null;
+		else
+			return ret.getPath();
 	}
 	/**
      * \brief initialise la liste de case en incendie  pour avant d'appeler djikstra, cette fonction existe pour une éventuelle amélioration de stratégie
@@ -380,7 +399,12 @@ public class Utilitaire {
 	public static ArrayList<Direction> incendiePlusProche(Robot r, DonneesSimulation d) {
 		LinkedList<Case> points = new LinkedList<Case>();
 		int i;
+<<<<<<< HEAD
 
+=======
+		PairDijkstra ret;
+		
+>>>>>>> f43dc6944345321d2902fd0677a220fa0e196a11
 		// On ajoute tout les points à proximité de l'incendie
 		for(i=0; i<d.getNbIncendies(); i++) {
 			for (Direction dir : Direction.values()) {
@@ -390,6 +414,10 @@ public class Utilitaire {
 		}
 
 		// on effectue le dijkstra
-		return dijkstra(r, points, d).getPath();
+		ret = dijkstra(r, points, d);
+		if(ret == null)
+			return null;
+		else
+			return ret.getPath();
 	}
 }

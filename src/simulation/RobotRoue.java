@@ -14,6 +14,7 @@ public class RobotRoue extends Robot {
         if (vit == -1) {
             this.setVitesse(80);
         }
+        volume = 5000;
     }
 
     public String getName() {
@@ -36,26 +37,30 @@ public class RobotRoue extends Robot {
         }
     }
 
+    
     /**
      * \brief met à jour le reservoir
      */
     public void remplirReservoir () {
-        // TODO LUCAAAAAAAAAAAS faut que tu écives Attendre
-        allerChercherEau();
-        //Attendre(10);
-        this.volume =5000;
+    	EvRemplir event = new EvRemplir(s.getDate() + 300, this, 2000);
+		s.ajouteEvenement(event);
     }
 
-	@Override
-	public void deverserEau(int vol) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void allerChercherEau() {
-		// TODO Auto-generated method stub
-
+    public void deverserEau(int vol) {	
+    	Evenement event;
+    	int i = 1;
+    	
+		if(target != null) {
+			while(vol > 100) {
+	    		event = new EvEteindre(s.getDate() + i*5, 100, this);
+	    		s.ajouteEvenement(event);
+	    		vol -= 100;
+	    		i++;
+	    	}
+			
+			event = new EvEteindre(s.getDate() + i*5, vol, this);
+    		s.ajouteEvenement(event);
+		}
 	}
 
 }

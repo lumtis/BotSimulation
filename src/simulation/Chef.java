@@ -7,7 +7,7 @@ import simulation.Carte.Direction;
 public class Chef {
 	private DonneesSimulation d;
 	private Simulateur s;
-	private Robot r;
+
 
 	/**
      * \brief constructeur de Chef
@@ -16,15 +16,20 @@ public class Chef {
      * \param le robot
      */
 	public Chef(DonneesSimulation d, Simulateur s, Robot r) {
+
+
+	public Chef(DonneesSimulation d, Simulateur s) {
+
 		this.d = d;
 		this.s = s;
-		this.r = r;
 	}
+
 
 
 	public void test() {
 		r.setPosition(d.getVoisin(r.getPosition(), Carte.Direction.EST));
 	}
+
 
 
 	/**
@@ -36,6 +41,7 @@ public class Chef {
 		Robot bestRobot;
 
 		for(i=0; i<d.getNbIncendies(); i++) {
+
 			if(d.getIncendies(i).getEtat() == Incendie.EtatIncendie.LIBRE) {
 				LinkedList<Case> voisins = new LinkedList<Case>();
 
@@ -47,11 +53,13 @@ public class Chef {
 				}
 
 				// On regarde quel est le robot libre le plus proche
-				for(j=0, bestRobot=null, bestPath = null; j<d.getNbRobots(); i++) {
+				for(j=0, bestRobot=null, bestPath = null; j<d.getNbRobots(); j++) {
 					Robot r = d.getRobots(j);
 					if(r.getEtat() == Robot.EtatRobot.RIEN) {
+						//System.out.println("test 1");
 						tmp = Utilitaire.dijkstra(r, voisins, d);
-						if(bestPath == null || tmp.getCout() < bestPath.getCout()) {
+						//System.out.println("test 2");
+						if(tmp != null && (bestPath == null || tmp.getCout() < bestPath.getCout())) {
 							bestPath = tmp;
 							bestRobot = r;
 						}
@@ -72,6 +80,10 @@ public class Chef {
 						// On creer un nouvelle evvenement pour le prochaine mouvement
 						EvDeplacerIncendie nextMove = new EvDeplacerIncendie(s.getDate() + delay, bestRobot, bestPath.getPath(), s);
 						s.ajouteEvenement(nextMove);
+					}
+					else {
+						bestRobot.setEtat(Robot.EtatRobot.ETEINDRE);
+						bestRobot.eteindreIncendie();
 					}
 				}
 			}

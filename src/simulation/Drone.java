@@ -1,5 +1,8 @@
 package simulation;
 
+import java.util.ArrayList;
+
+import simulation.Carte.Direction;
 import simulation.Case.NatureTerrain;
 
 public class Drone extends Robot {
@@ -15,6 +18,7 @@ public class Drone extends Robot {
         if (vit == -1) {
             this.setVitesse(100);
         }
+        volume = 10000;
     }
 
     /**
@@ -50,23 +54,34 @@ public class Drone extends Robot {
      * \brief rempli le reservoir du robot
      */
     public void remplirReservoir () {
-        allerChercherEau();
-        //Attendre(30);
-        this.volume =10000;
+    	EvRemplir event = new EvRemplir(s.getDate() + 1800, this, 10000);
+		s.ajouteEvenement(event);
     }
+
     /**
      * \brief rempli le reservoir du robot
      */
 	public void deverserEau(int vol) {
+
+
+
+	public void deverserEau(int vol) {
+
 		if(target != null) {
-			//EvEteindre ev = new EvEteindre(vol);
+			EvEteindre event = new EvEteindre(s.getDate() + 30, 10000, this);
+			s.ajouteEvenement(event);
 		}
 	}
 
+
 	@Override
+
 	public void allerChercherEau() {
+	    ArrayList<Direction> path = Utilitaire.eauPlusProche(this, s.getData());
+	    long delay = Utilitaire.delayCase(this, this.getPosition(), s.getData());
 
+		// On creer un nouvelle evvenement pour le prochaine mouvement
+		EvDeplacerEau nextMove = new EvDeplacerEau(s.getDate() + delay, this, path, s);
+		s.ajouteEvenement(nextMove);
 	}
-
-
 }
