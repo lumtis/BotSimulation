@@ -1,5 +1,8 @@
 package simulation;
 
+import java.util.ArrayList;
+
+import simulation.Carte.Direction;
 import simulation.Incendie.EtatIncendie;
 
 public abstract class Robot
@@ -47,14 +50,49 @@ public abstract class Robot
         position = c;
     }
     
+    public int getVolume() {
+    	return volume;
+    }
+    
+    public void setVolume(int v) {
+    	volume = v;
+    }
+    
     public EtatRobot getEtat() {
     	return e;
     }
     
     public void setEtat(EtatRobot e) {
+    	// Debug
+    	System.out.print("Robot ");
+    	System.out.print(this.getName());
+    	System.out.print(" ");
+    	System.out.println(e);
+    	
     	this.e = e;
     }
 
+    public void eteindreIncendie() {
+    	if(this.volume == -1) {
+    		deverserEau(this.target.getIntensite());
+    	}
+    	else if(this.volume > this.target.getIntensite()) {
+    		deverserEau(this.target.getIntensite());
+    	}
+    	else {
+    		deverserEau(this.volume);
+    	}
+    }
+    
+    public void allerChercherEau() {
+    	ArrayList<Direction> path = Utilitaire.eauPlusProche(this, s.getData());
+    	long delay = Utilitaire.delayCase(this, this.getPosition(), s.getData());
+
+		// On creer un nouvelle evvenement pour le prochaine mouvement
+		EvDeplacerEau nextMove = new EvDeplacerEau(s.getDate() + delay, this, path, s);
+		s.ajouteEvenement(nextMove);
+    }
+    
     abstract public String getName();
     
     abstract public double getVitesse(Case.NatureTerrain n);
@@ -62,5 +100,4 @@ public abstract class Robot
     abstract public void deverserEau(int vol);
 
     abstract public void remplirReservoir();
-    abstract public void allerChercherEau();
 }

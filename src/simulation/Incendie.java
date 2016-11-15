@@ -3,6 +3,7 @@ public class Incendie
 {
 	public enum EtatIncendie {LIBRE, OCCUPE, ETEINT}
     private Case position;
+    private int intensiteDepard;
     private int intensite;
     private EtatIncendie e;
 

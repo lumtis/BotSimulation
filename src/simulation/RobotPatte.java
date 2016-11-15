@@ -9,6 +9,7 @@ public class RobotPatte extends Robot {
         if (vit == -1) {
             this.setVitesse(30);
         }
+        volume = -1;	// Infini
     }
 
     public String getName() {
@@ -16,17 +17,21 @@ public class RobotPatte extends Robot {
     }
     
 
-	@Override
-	public void deverserEau(int vol) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void allerChercherEau() {
-		// TODO Auto-generated method stub
-		
+    public void deverserEau(int vol) {	
+    	Evenement event;
+    	int i = 1;
+    	
+		if(target != null) {
+			while(vol > 10) {
+	    		event = new EvEteindre(s.getDate() + i, 10, this);
+	    		s.ajouteEvenement(event);
+	    		vol -= 10;
+	    		i++;
+	    	}
+			
+			event = new EvEteindre(s.getDate() + i, vol, this);
+    		s.ajouteEvenement(event);
+		}
 	}
     
     public double getVitesse(NatureTerrain n){
@@ -39,7 +44,7 @@ public class RobotPatte extends Robot {
     }
     
     public void remplirReservoir () {
-        return;
+    	
     }
     
 

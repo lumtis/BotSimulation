@@ -14,6 +14,7 @@ public class Simulateur implements Simulable
     private GUISimulator gui;
     private long dateSimulation;
     private ArrayList<Evenement> ev;
+    private Chef chef;
     
     // MACRO
     public static final long PAS = 10;	// secondes
@@ -36,13 +37,12 @@ public class Simulateur implements Simulable
 
         dateSimulation = 0;
         ev = new ArrayList<Evenement>();
+        chef = new Chef(data, this);
         
         this.gui = gui;
         gui.setSimulable(this);
         
         draw();
-        Chef test = new Chef(data, this, data.getRobots(0));
-    	test.test();
     }
 
     public DonneesSimulation getData() {
@@ -52,7 +52,7 @@ public class Simulateur implements Simulable
     private String getImageName(Case.NatureTerrain nature) {
         switch(nature) {
             case EAU:
-                return "res/water.gif";
+                return "res/water.png";
             case FORET:
                 return "res/tree.png";
             case ROCHE:
@@ -93,6 +93,11 @@ public class Simulateur implements Simulable
     	
         draw();
     	incrementeDate();
+    	
+    	// On realise l'inspection des robots
+    	if(dateSimulation % 10 == 0) {
+    		chef.inspecter();
+    	}
     }
 
     @Override
@@ -123,12 +128,14 @@ public class Simulateur implements Simulable
         
         // Affichage des incendies
         for(i=0; i<data.getNbIncendies(); i++) {
-        	gui.addGraphicalElement(new ImageElement( 	data.getIncendies(i).getPosition().getColonne() * realLargeur,
-        												data.getIncendies(i).getPosition().getLigne() * realLongueur,
-        												FIRENAME,
-									                    realLargeur,
-									                    realLongueur,
-									                    null ));
+        	if(data.getIncendies(i).getEtat() != Incendie.EtatIncendie.ETEINT) {
+	        	gui.addGraphicalElement(new ImageElement( 	data.getIncendies(i).getPosition().getColonne() * realLargeur,
+	        												data.getIncendies(i).getPosition().getLigne() * realLongueur,
+	        												FIRENAME,
+										                    realLargeur,
+										                    realLongueur,
+										                    null ));
+        	}
         }
         
         // Affichage des robots

@@ -1,5 +1,4 @@
 package simulation;
-import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
 import simulation.Carte.Direction;
