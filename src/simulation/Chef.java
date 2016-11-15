@@ -7,20 +7,25 @@ import simulation.Carte.Direction;
 public class Chef {
 	private DonneesSimulation d;
 	private Simulateur s;
-
+	private boolean fin;
 	
 	public Chef(DonneesSimulation d, Simulateur s) {
 		this.d = d;
 		this.s = s;
+		fin = false;
 	}
 
-
+	public boolean isTerminate() {
+		return fin;
+	}
+	
 	public void inspecter() {
 		int i, j;
 		Utilitaire.PairDijkstra tmp, bestPath;
 		Robot bestRobot;
+		boolean tousEteint;
 
-		for(i=0; i<d.getNbIncendies(); i++) {
+		for(i=0, tousEteint=true; i<d.getNbIncendies(); i++) {
 			
 			if(d.getIncendies(i).getEtat() == Incendie.EtatIncendie.LIBRE) {
 				LinkedList<Case> voisins = new LinkedList<Case>();
@@ -67,6 +72,12 @@ public class Chef {
 					}
 				}
 			}
+			if(d.getIncendies(i).getEtat() != Incendie.EtatIncendie.ETEINT) {
+				tousEteint = false;
+			}
+		}
+		if(tousEteint == true) {
+			fin = true;
 		}
 	}
 }

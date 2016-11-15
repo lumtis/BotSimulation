@@ -119,8 +119,7 @@ public class DonneesSimulation {
      * \brief
      * \return la carte
      */
-    public Carte getCarte()
-    {
+    public Carte getCarte() {
         return carte;
     }
 
@@ -140,8 +139,7 @@ public class DonneesSimulation {
      * \param n
      */
 
-    public Incendie getIncendies(int n)
-    {
+    public Incendie getIncendies(int n) {
         return incendies[n];
     }
     /**
@@ -157,8 +155,7 @@ public class DonneesSimulation {
      * \return le n ème robot
      * \ param n
      */
-    public Robot getRobots(int n)
-    {
+    public Robot getRobots(int n) {
         return robots[n];
     }
 

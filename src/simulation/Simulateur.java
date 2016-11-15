@@ -16,12 +16,14 @@ public class Simulateur implements Simulable {
     private long dateSimulation;
     private ArrayList<Evenement> ev;
     private Chef chef;
+    private String name;
     
     // MACRO
     public static final long PAS = 10;	// secondes
     public static final int FENETRELARGEUR = 800;
     public static final int FENETRELONGUEUR = 800;
     public static final String FIRENAME = "res/fire.gif";
+    public static final String WINNAME = "res/youwin.png";
 
     /**
      * \brief constructeur Simulateur
@@ -30,6 +32,7 @@ public class Simulateur implements Simulable {
      */
     public Simulateur(GUISimulator gui, String name)
     {
+    	this.name = name;
         // Recupération des données
         try {
 			data = new DonneesSimulation(name, this);
@@ -107,6 +110,21 @@ public class Simulateur implements Simulable {
 
     @Override
     public void restart() {
+    	// Recupération des données
+        try {
+			data = new DonneesSimulation(name, this);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        dateSimulation = 0;
+        ev = new ArrayList<Evenement>();
+        chef = new Chef(data, this);
+    	
         draw();
     }
 
@@ -141,8 +159,8 @@ public class Simulateur implements Simulable {
 	        	gui.addGraphicalElement(new ImageElement( 	data.getIncendies(i).getPosition().getColonne() * realLargeur,
 	        												data.getIncendies(i).getPosition().getLigne() * realLongueur,
 	        												FIRENAME,
-										                    realLargeur,
-										                    realLongueur,
+										                    (int)((float)realLargeur * ((float)data.getIncendies(i).getIntensite()/(float)data.getIncendies(i).getIntensiteDepard())),
+										                    (int)((float)realLongueur * ((float)data.getIncendies(i).getIntensite()/(float)data.getIncendies(i).getIntensiteDepard())),
 										                    null ));
         	}
         }
@@ -157,6 +175,15 @@ public class Simulateur implements Simulable {
 									                    null ));
 
 
+        }
+        
+        if(simulationTerminee()) {
+        	gui.addGraphicalElement(new ImageElement( 	FENETRELARGEUR/2 - 100,
+        												FENETRELONGUEUR/2 - 100,
+														"res/youwin.png",
+														200,
+														200,
+														null ));
         }
     }
 
@@ -187,6 +214,6 @@ public class Simulateur implements Simulable {
     }
 
     public boolean simulationTerminee() {
-    	return false;
+    	return chef.isTerminate();
     }
 }

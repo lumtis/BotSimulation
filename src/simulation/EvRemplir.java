@@ -12,7 +12,6 @@ public class EvRemplir extends Evenement {
 
 	@Override
 	void execute() {
-		System.out.println("TEST !!!!!!!!!!");
 		robot.setVolume(vol);
 		robot.setEtat(Robot.EtatRobot.RIEN);
 	}

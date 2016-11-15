@@ -24,6 +24,10 @@ public class Incendie
         return this.intensite;
     }
     
+    public int getIntensiteDepard() {
+    	return intensiteDepard;
+    }
+    
     public void setIntensite(int i) {
     	intensite = i;
     }

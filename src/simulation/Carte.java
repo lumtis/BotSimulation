@@ -17,16 +17,14 @@ public class Carte {
      * \param nombre de lignes
      * \param nombre de colonnes
      */
-    public Carte(int tailleCase, int nbLignes, int nbColonnes)
-    {
+    public Carte(int tailleCase, int nbLignes, int nbColonnes) {
         this.tailleCase = tailleCase;
         this.nbLignes = nbLignes;
         this.nbColonnes = nbColonnes;
         this.matrice = new Case[nbLignes][nbColonnes];
     }
 
-    public void Evenement(long date)
-    {
+    public void Evenement(long date) {
 
     }
 
@@ -35,8 +33,7 @@ public class Carte {
      * \brief
      * \return le nombre de ligne
      */
-    public int getNbLignes()
-    {
+    public int getNbLignes() {
         return nbLignes;
     }
 
@@ -48,8 +45,7 @@ public class Carte {
      * \return le nombre de colonnes
      */
 
-     public int getNbColonnes()
-    {
+     public int getNbColonnes() {
         return nbColonnes;
     }
 
@@ -58,8 +54,7 @@ public class Carte {
      * \return la taille des cases de la carte
      */
 
-    public int getTailleCases()
-    {
+    public int getTailleCases() {
         return tailleCase;
     }
 
@@ -71,8 +66,7 @@ public class Carte {
      * \param la colonne
      */
 
-    public Case getCase(int lig, int col)
-    {
+    public Case getCase(int lig, int col) {
         return matrice[lig][col];
     }
 
@@ -82,8 +76,7 @@ public class Carte {
      * \param la colonne
      * \param la case
      */
-    public void setCase(int lig, int col, Case nCase)
-    {
+    public void setCase(int lig, int col, Case nCase) {
         this.matrice[lig][col] = nCase;
     }
 
@@ -94,10 +87,8 @@ public class Carte {
      * \param case source
      * \param direction du voisin
      */
-    public boolean voisinExiste(Case src, Direction dir)
-    {
-        switch(dir)
-        {
+    public boolean voisinExiste(Case src, Direction dir) {
+        switch(dir) {
             case NORD:
                 if(src.getLigne() == 0)
                     return false;

@@ -20,8 +20,7 @@ public class Case {
     /**
      * \brief constructeur case
      */
-    public Case()
-    {
+    public Case() {
       this.ligne = 0;
       this.colonne = 0;
       this.nature = NatureTerrain.TERRAIN_LIBRE;
@@ -34,8 +33,7 @@ public class Case {
      * \param colonne de la case
      * \param nature de la case
      */
-    public Case(int ligne, int colonne, NatureTerrain nature)
-    {
+    public Case(int ligne, int colonne, NatureTerrain nature) {
         this.ligne = ligne;
         this.colonne = colonne;
         this.nature = nature;
@@ -46,8 +44,7 @@ public class Case {
      * \brief
      * \ return la ligne de la cae
      */
-    public int getLigne()
-    {
+    public int getLigne() {
         return ligne;
     }
 
@@ -55,8 +52,7 @@ public class Case {
      * \brief
      * \ return la colonne de la case
      */
-    public int getColonne()
-    {
+    public int getColonne() {
         return colonne;
     }
 
@@ -66,8 +62,7 @@ public class Case {
      * \brief
      * \ return la nature du terrain
      */
-    public NatureTerrain getNature()
-    {
+    public NatureTerrain getNature() {
         return nature;
     }
 }
